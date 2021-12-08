@@ -7,7 +7,10 @@ def mineblock():
 def add_value(sa):
     blockchain.append([blockchain[-1],sa])
 
+def add_transactions(sender,reciever,amount=2.0):
 
+    transaction={'Sender':sender, 'Recipient':reciever,'Amount':amount}
+    open_transactions.append()
 
 def get_input():
     return input("What is the input currency that you wish to invest ? :")
