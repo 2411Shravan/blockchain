@@ -1,4 +1,8 @@
 blockchain=[1]
+open_transactions=[]
+
+def mineblock():
+    pass
 
 def add_value(sa):
     blockchain.append([blockchain[-1],sa])
