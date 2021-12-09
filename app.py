@@ -34,7 +34,8 @@ while match:
     inp=getoption()
     if(inp=="1"):
         s=(get_input())
-        add_value(float(s))
+        recipient,amount=s
+        add_value(coinsender,recipient,amount)
 
     elif(inp=="2"):
         for block in blockchain:
