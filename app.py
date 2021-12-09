@@ -1,5 +1,6 @@
 blockchain=[1]
 open_transactions=[]
+coinsender="Shravan"
 
 def mineblock():
     pass
@@ -10,10 +11,13 @@ def add_value(sa):
 def add_transactions(sender,reciever,amount=2.0):
 
     transaction={'Sender':sender, 'Recipient':reciever,'Amount':amount}
-    open_transactions.append()
+    open_transactions.append(transaction)
 
 def get_input():
-    return input("What is the input currency that you wish to invest ? :")
+
+    recipient=input("Enter the recipient of the transaction : \n")
+    currency=input("What is the input currency that you wish to invest ? :")
+    return (recipient,currency)
 
 def getoption():
     return input("What's your option?")
