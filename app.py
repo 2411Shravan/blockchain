@@ -35,10 +35,10 @@ while match:
     if(inp=="1"):
         s=(get_input())
         recipient,amount=s
-        add_value(coinsender,recipient,amount)
+        add_transactions(coinsender,recipient,amount)
 
     elif(inp=="2"):
-        for block in blockchain:
+        for block in open_transactions:
             i=1
             print("Printing block "+str(i)+" in blockchains : \n")
             i=i+1
@@ -49,3 +49,4 @@ while match:
     
 
 
+print(open_transactions)
