@@ -1,8 +1,12 @@
+genesis_block={'previous_hash':'','index':0,'Transactions':[]}
 blockchain=[1]
 open_transactions=[]
 coinsender="Shravan"
 
 def mineblock():
+    last_block=blockchain[-1]
+    block={'previous_hash':'XYYZ','index':len(blockchain),'Transactions':open_transactions}
+    blockchain.append(block)
     pass
 
 def add_value(sa):
