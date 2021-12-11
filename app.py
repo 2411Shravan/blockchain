@@ -1,10 +1,17 @@
 blockchain=[1]
 
-def add_value():
-    blockchain.append([blockchain[0],5.8])
+def add_value(sa):
+    blockchain.append([blockchain[-1],sa])
     print(blockchain)
 
 
-add_value()
-add_value()
-add_value()
+def get_input():
+    return input("What is the input currency that you wish to invest ? :")
+
+
+s=(get_input())
+add_value(float(s))
+s=(get_input())
+add_value(float(s))
+s=(get_input())
+add_value(float(s))
