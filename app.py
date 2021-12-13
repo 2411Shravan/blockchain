@@ -5,7 +5,7 @@ coinsender="Shravan"
 
 def mineblock():
     last_block=blockchain[-1]
-    hashed_block=[last_block[key] for key in last_block]
+    hashed_block='-'.join([str(last_block[key]) for key in last_block])
     for keys in last_block:
         value=last_block[keys]
         hashed_block=hashed_block+str(value)
