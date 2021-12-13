@@ -1,16 +1,19 @@
 genesis_block={'previous_hash':'','index':0,'Transactions':[]}
-blockchain=[1]
+blockchain=[genesis_block]
 open_transactions=[]
 coinsender="Shravan"
 
 def mineblock():
     last_block=blockchain[-1]
+    hashed_block=[last_block[key] for key in last_block]
     for keys in last_block:
         value=last_block[keys]
+        hashed_block=hashed_block+str(value)
 
-    block={'previous_hash':'XYYZ','index':len(blockchain),'Transactions':open_transactions}
+    print(hashed_block)
+    block={'previous_hash':hashed_block,'index':len(blockchain),'Transactions':open_transactions}
     blockchain.append(block)
-    pass
+    
 
 def add_value(sa):
     blockchain.append([blockchain[-1],sa])
@@ -36,6 +39,7 @@ match=True
 while match:
     print("1 : Invest amount(Enter in INR)")
     print("2: Show current investments")
+    print("3: Mine a new block")
     print("q: Quit")
 
     inp=getoption()
@@ -51,6 +55,8 @@ while match:
             i=i+1
             print(block)
 
+    elif(inp=="3"):
+        mineblock()
     else:
         break
     
