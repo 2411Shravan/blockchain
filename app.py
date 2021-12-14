@@ -19,8 +19,9 @@ def mineblock():
     
 
 def verify_chain():
-    for block in enumerate(blockchain):
-        pass
+    for (index,block) in enumerate(blockchain):
+        if(index==0):
+            continue
 
 def add_value(sa):
     blockchain.append([blockchain[-1],sa])
