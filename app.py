@@ -2,6 +2,7 @@ genesis_block={'previous_hash':'','index':0,'Transactions':[]}
 blockchain=[genesis_block]
 open_transactions=[]
 coinsender="Shravan"
+participants={"Shravan"}
 
 def hash_block(block):
     return '-'.join([str(block[key]) for key in block])
@@ -22,6 +23,10 @@ def verify_chain():
     for (index,block) in enumerate(blockchain):
         if(index==0):
             continue
+        if block['previous_hash']==hash_block(blockchain[index-1]):
+            return False
+    
+    return True
 
 def add_value(sa):
     blockchain.append([blockchain[-1],sa])
@@ -30,6 +35,8 @@ def add_transactions(sender,reciever,amount=2.0):
 
     transaction={'Sender':sender, 'Recipient':reciever,'Amount':amount}
     open_transactions.append(transaction)
+    participants.add(coinsender)
+    participants.add(reciever)
 
 def get_input():
 
@@ -48,6 +55,7 @@ while match:
     print("1 : Invest amount(Enter in INR)")
     print("2: Show current investments")
     print("3: Mine a new block")
+    print("4: Check participants")
     print("q: Quit")
 
     inp=getoption()
@@ -65,9 +73,18 @@ while match:
 
     elif(inp=="3"):
         mineblock()
+
+    elif(inp=="4"):
+        print(participants)
+
     else:
         break
     
 
 
 print(open_transactions)
+if not verify_chain():
+    print("Invalid blockchain transaction")
+
+else:
+    print("Valid blockchain")
