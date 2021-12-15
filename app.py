@@ -7,6 +7,10 @@ participants={"Shravan"}
 def hash_block(block):
     return '-'.join([str(block[key]) for key in block])
 
+
+def get_balances(participant):
+    pass
+
 def mineblock():
     last_block=blockchain[-1]
     hashed_block=hash_block(last_block)
@@ -17,6 +21,7 @@ def mineblock():
     print(hashed_block)
     block={'previous_hash':hashed_block,'index':len(blockchain),'Transactions':open_transactions}
     blockchain.append(block)
+    return True
     
 
 def verify_chain():
@@ -72,7 +77,8 @@ while match:
             print(block)
 
     elif(inp=="3"):
-        mineblock()
+        if mineblock():
+            open_transactions=[]
 
     elif(inp=="4"):
         print(participants)
