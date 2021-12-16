@@ -9,7 +9,18 @@ def hash_block(block):
 
 
 def get_balances(participant):
-    pass
+    curr_sender=[[tx['Amount'] for tx in block['Transactions'] if tx['Sender']==participant] for block in blockchain]
+    curr_reciever=[[tx['Amount'] for tx in block['Transactions'] if tx['Recipient']==participant] for block in blockchain]
+    amount_sent=0
+    amount_recieved=0
+    for tx in curr_sender:
+        if (len(tx)>0):
+            amount_sent+=float(tx[0])
+
+    for tr in curr_reciever:
+        if (len(tr)>0):
+            amount_recieved+=float(tx[0])
+    return {amount_sent,amount_recieved}
 
 def mineblock():
     last_block=blockchain[-1]
@@ -86,6 +97,7 @@ while match:
     else:
         break
     
+    print(float(get_balances(coinsender)))
 
 
 print(open_transactions)
