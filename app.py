@@ -96,8 +96,8 @@ while match:
 
     else:
         break
-    
-    print(float(get_balances(coinsender)))
+    send,recieve=get_balances(coinsender)
+    print(send,recieve)
 
 
 print(open_transactions)
