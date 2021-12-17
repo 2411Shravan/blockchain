@@ -20,7 +20,7 @@ def get_balances(participant):
     for tr in curr_reciever:
         if (len(tr)>0):
             amount_recieved+=float(tx[0])
-    return {amount_sent,amount_recieved}
+    return (amount_sent,amount_recieved,amount_recieved-amount_sent)
 
 def mineblock():
     last_block=blockchain[-1]
@@ -96,8 +96,8 @@ while match:
 
     else:
         break
-    send,recieve=get_balances(coinsender)
-    print(send,recieve)
+    send,recieve,total=get_balances(coinsender)
+    print(send,recieve,total)
 
 
 print(open_transactions)
