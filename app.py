@@ -4,6 +4,8 @@ open_transactions=[]
 coinsender="Shravan"
 participants={"Shravan"}
 
+mining_reward = 10
+
 def hash_block(block):
     return '-'.join([str(block[key]) for key in block])
 
@@ -25,6 +27,13 @@ def get_balances(participant):
 def mineblock():
     last_block=blockchain[-1]
     hashed_block=hash_block(last_block)
+    reward_transaction={
+        'Sender': 'Mining',
+        'Recipient': coinsender,
+        'Amount': mining_reward
+    }
+
+    open_transactions.append(reward_transaction)
     for keys in last_block:
         value=last_block[keys]
         hashed_block=hashed_block+str(value)
@@ -43,6 +52,13 @@ def verify_chain():
             return False
     
     return True
+
+def verify_transaction(transaction):
+    se_balance=get_balances(transaction['Sender'])
+    if se_balance>= transaction['Amount']:
+        return True
+    else:
+        return False
 
 def add_value(sa):
     blockchain.append([blockchain[-1],sa])
