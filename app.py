@@ -9,6 +9,12 @@ mining_reward = 10
 def hash_block(block):
     return '-'.join([str(block[key]) for key in block])
 
+def verify_transaction(transaction):
+    se_balance=get_balances(transaction['Sender'])
+    if se_balance>= transaction['Amount']:
+        return True
+    else:
+        return False
 
 def get_balances(participant):
     curr_sender=[[tx['Amount'] for tx in block['Transactions'] if tx['Sender']==participant] for block in blockchain]
@@ -53,12 +59,7 @@ def verify_chain():
     
     return True
 
-def verify_transaction(transaction):
-    se_balance=get_balances(transaction['Sender'])
-    if se_balance>= transaction['Amount']:
-        return True
-    else:
-        return False
+
 
 def add_value(sa):
     blockchain.append([blockchain[-1],sa])
