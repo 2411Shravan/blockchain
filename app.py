@@ -40,7 +40,9 @@ def mineblock():
         'Recipient': coinsender,
         'Amount': mining_reward
     }
-    copied_transactions = open_transactions
+
+    copied_transactions=open_transactions[:]
+    copied_transactions.append(reward_transaction)
 
     open_transactions.append(reward_transaction)
     for keys in last_block:
@@ -48,7 +50,7 @@ def mineblock():
         hashed_block=hashed_block+str(value)
 
     print(hashed_block)
-    block={'previous_hash':hashed_block,'index':len(blockchain),'Transactions':open_transactions}
+    block={'previous_hash':hashed_block,'index':len(blockchain),'Transactions':copied_transactions}
     blockchain.append(block)
     return True
     
@@ -87,7 +89,15 @@ def getoption():
     return input("What's your option?")
 
 
+def valid_transaction():
+    let_mes=True
+    for tx in open_transactions:
+        if verify_transaction(tx):
+            let_mes=True
+        else:
+            let_mes=False
 
+    return let_mes
 
 match=True
 while match:
@@ -95,6 +105,7 @@ while match:
     print("2: Show current investments")
     print("3: Mine a new block")
     print("4: Check participants")
+    print("5: Transaction Validity")
     print("q: Quit")
 
     inp=getoption()
@@ -119,6 +130,14 @@ while match:
 
     elif(inp=="4"):
         print(participants)
+
+
+    elif(inp=="5"):
+        result=print(participants)
+        if result:
+            print("Valid Transaction")
+        else:
+            print("Invalid Transaction")
 
     else:
         break
