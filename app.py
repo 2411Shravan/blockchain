@@ -18,6 +18,8 @@ def verify_transaction(transaction):
 
 def get_balances(participant):
     curr_sender=[[tx['Amount'] for tx in block['Transactions'] if tx['Sender']==participant] for block in blockchain]
+    open_curr_sender=[tx['Amount'] for tx in open_transactions if tx['Sender']==participant]
+    curr_sender.append(open_curr_sender)
     curr_reciever=[[tx['Amount'] for tx in block['Transactions'] if tx['Recipient']==participant] for block in blockchain]
     amount_sent=0
     amount_recieved=0
@@ -64,7 +66,7 @@ def verify_chain():
 def add_value(sa):
     blockchain.append([blockchain[-1],sa])
 
-def add_transactions(sender,reciever,amount=2.0):
+def add_transactions(sender,reciever,amount=1.0):
 
     transaction={'Sender':sender, 'Recipient':reciever,'Amount':amount}
     if verify_transaction(transaction):
@@ -98,7 +100,10 @@ while match:
     if(inp=="1"):
         s=(get_input())
         recipient,amount=s
-        add_transactions(coinsender,recipient,amount)
+        if add_transactions(coinsender,recipient,amount):
+            print("Transaction Successful")
+        else:
+            print("Transaction Failed")
 
     elif(inp=="2"):
         for block in open_transactions:
