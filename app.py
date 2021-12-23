@@ -67,9 +67,12 @@ def add_value(sa):
 def add_transactions(sender,reciever,amount=2.0):
 
     transaction={'Sender':sender, 'Recipient':reciever,'Amount':amount}
-    open_transactions.append(transaction)
-    participants.add(coinsender)
-    participants.add(reciever)
+    if verify_transaction(transaction):
+        open_transactions.append(transaction)
+        participants.add(coinsender)
+        participants.add(reciever)
+        return True
+    return False
 
 def get_input():
 
