@@ -29,7 +29,7 @@ def get_balances(participant):
 
     for tr in curr_reciever:
         if (len(tr)>0):
-            amount_recieved+=float(tx[0])
+            amount_recieved+=float(tr[0])
     return (amount_sent,amount_recieved,amount_recieved-amount_sent)
 
 def mineblock():
@@ -40,6 +40,7 @@ def mineblock():
         'Recipient': coinsender,
         'Amount': mining_reward
     }
+    copied_transactions = open_transactions
 
     open_transactions.append(reward_transaction)
     for keys in last_block:
