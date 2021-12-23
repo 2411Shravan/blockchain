@@ -3,9 +3,12 @@ blockchain=[genesis_block]
 open_transactions=[]
 coinsender="Shravan"
 
+def hash_block(block):
+    return '-'.join([str(block[key]) for key in block])
+
 def mineblock():
     last_block=blockchain[-1]
-    hashed_block='-'.join([str(last_block[key]) for key in last_block])
+    hashed_block=hash_block(last_block)
     for keys in last_block:
         value=last_block[keys]
         hashed_block=hashed_block+str(value)
