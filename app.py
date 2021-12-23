@@ -10,8 +10,8 @@ def hash_block(block):
     return '-'.join([str(block[key]) for key in block])
 
 def verify_transaction(transaction):
-    se_balance=get_balances(transaction['Sender'])
-    if se_balance>= transaction['Amount']:
+    sent,recieved,balance=get_balances(transaction['Sender'])
+    if float(balance) >= float(transaction['Amount']):
         return True
     else:
         return False
