@@ -133,7 +133,7 @@ while match:
 
 
     elif(inp=="5"):
-        result=print(participants)
+        result=valid_transaction()
         if result:
             print("Valid Transaction")
         else:
