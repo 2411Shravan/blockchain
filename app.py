@@ -43,33 +43,24 @@ def get_balance(participant):
     tx_sender.append(open_tx_sender)
     print(tx_sender)
     amount_sent = functools.reduce(lambda tx_sum, tx_amt: tx_sum + sum(tx_amt) if len(tx_amt) > 0 else tx_sum + 0, tx_sender, 0)
-    # This fetches received coin amounts of transactions that were already included in blocks of the blockchain
-    # We ignore open transactions here because you shouldn't be able to spend coins before the transaction was confirmed + included in a block
+   
     tx_recipient = [[tx['amount'] for tx in block['transactions'] if tx['recipient'] == participant] for block in blockchain]
     amount_received = functools.reduce(lambda tx_sum, tx_amt: tx_sum + sum(tx_amt) if len(tx_amt) > 0 else tx_sum + 0, tx_recipient, 0)
-    # Return the total balance
     return amount_received - amount_sent
 
 
 def get_last_blockchain_value():
-    """ Returns the last value of the current blockchain. """
+   
     if len(blockchain) < 1:
         return None
     return blockchain[-1]
 
 
 def verify_transaction(transaction):
-    """Verify a transaction by checking whether the sender has sufficient coins.
-
-    Arguments:
-        :transaction: The transaction that should be verified.
-    """
+   
     sender_balance = get_balance(transaction['sender'])
     return sender_balance >= transaction['amount']
 
-# This function accepts two arguments.
-# One required one (transaction_amount) and one optional one (last_transaction)
-# The optional one is optional because it has a default value => [1]
 
 
 def add_transaction(recipient, sender=owner, amount=1.0):
@@ -88,19 +79,17 @@ def add_transaction(recipient, sender=owner, amount=1.0):
 
 
 def mine_block():
-    """Create a new block and add open transactions to it."""
-    # Fetch the currently last block of the blockchain
+   
     last_block = blockchain[-1]
-    # Hash the last block (=> to be able to compare it to the stored hash value)
+
     hashed_block = hash_block(last_block)
-    # Miners should be rewarded, so let's create a reward transaction
+   
     reward_transaction = {
         'sender': 'MINING',
         'recipient': owner,
         'amount': MINING_REWARD
     }
-    # Copy transaction instead of manipulating the original open_transactions list
-    # This ensures that if for some reason the mining should fail, we don't have the reward transaction stored in the open transactions
+   
     copied_transactions = open_transactions[:]
     copied_transactions.append(reward_transaction)
     block = {
@@ -113,22 +102,20 @@ def mine_block():
 
 
 def get_transaction_value():
-    """ Returns the input of the user (a new transaction amount) as a float. """
-    # Get the user input, transform it from a string to a float and store it in user_input
+    
     tx_recipient = input('Enter the recipient of the transaction: ')
     tx_amount = float(input('Your transaction amount please: '))
     return tx_recipient, tx_amount
 
 
 def get_user_choice():
-    """Prompts the user for its choice and return it."""
+  
     user_input = input('Your choice: ')
     return user_input
 
 
 def print_blockchain_elements():
-    """ Output all blocks of the blockchain. """
-    # Output the blockchain list to the console
+   
     for block in blockchain:
         print('Outputting Block')
         print(block)
@@ -137,7 +124,7 @@ def print_blockchain_elements():
 
 
 def verify_chain():
-    """ Verify the current blockchain and return True if it's valid, False otherwise."""
+
     for (index, block) in enumerate(blockchain):
         if index == 0:
             continue
@@ -147,14 +134,13 @@ def verify_chain():
 
 
 def verify_transactions():
-    """Verifies all open transactions."""
+    
     return all([verify_transaction(tx) for tx in open_transactions])
 
 
 waiting_for_input = True
 
-# A while loop for the user input interface
-# It's a loop that exits once waiting_for_input becomes False or when break is called
+
 while waiting_for_input:
     print('Please choose')
     print('1: Add a new transaction value')
