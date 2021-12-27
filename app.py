@@ -73,13 +73,7 @@ def verify_transaction(transaction):
 
 
 def add_transaction(recipient, sender=owner, amount=1.0):
-    """ Append a new value as well as the last blockchain value to the blockchain.
-
-    Arguments:
-        :sender: The sender of the coins.
-        :recipient: The recipient of the coins.
-        :amount: The amount of coins sent with the transaction (default = 1.0)
-    """
+    
     transaction = {
         'sender': sender,
         'recipient': recipient,
@@ -174,7 +168,6 @@ while waiting_for_input:
     if user_choice == '1':
         tx_data = get_transaction_value()
         recipient, amount = tx_data
-        # Add the transaction amount to the blockchain
         if add_transaction(recipient, amount=amount):
             print('Added transaction!')
         else:
@@ -193,7 +186,6 @@ while waiting_for_input:
         else:
             print('There are invalid transactions')
     elif user_choice == 'h':
-        # Make sure that you don't try to "hack" the blockchain if it's empty
         if len(blockchain) >= 1:
             blockchain[0] = {
                 'previous_hash': '',
@@ -201,14 +193,12 @@ while waiting_for_input:
                 'transactions': [{'sender': 'Chris', 'recipient': 'Max', 'amount': 100.0}]
             }
     elif user_choice == 'q':
-        # This will lead to the loop to exist because it's running condition becomes False
         waiting_for_input = False
     else:
         print('Input was invalid, please pick a value from the list!')
     if not verify_chain():
         print_blockchain_elements()
         print('Invalid blockchain!')
-        # Break out of the loop
         break
     print('Balance of {}: {:6.2f}'.format('Max', get_balance('Max')))
 else:
