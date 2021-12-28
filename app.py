@@ -29,16 +29,9 @@ def hash_block(block):
 
 
 def get_balance(participant):
-    """Calculate and return the balance for a participant.
-
-    Arguments:
-        :participant: The person for whom to calculate the balance.
-    """
-    # Fetch a list of all sent coin amounts for the given person (empty lists are returned if the person was NOT the sender)
-    # This fetches sent amounts of transactions that were already included in blocks of the blockchain
+    
     tx_sender = [[tx['amount'] for tx in block['transactions'] if tx['sender'] == participant] for block in blockchain]
-    # Fetch a list of all sent coin amounts for the given person (empty lists are returned if the person was NOT the sender)
-    # This fetches sent amounts of open transactions (to avoid double spending)
+
     open_tx_sender = [tx['amount'] for tx in open_transactions if tx['sender'] == participant]
     tx_sender.append(open_tx_sender)
     print(tx_sender)
