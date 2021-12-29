@@ -20,11 +20,7 @@ participants = {'Max'}
 
 
 def hash_block(block):
-    """Hashes a block and returns a string representation of it.
     
-    Arguments:
-        :block: The block that should be hashed.
-    """
     return '-'.join([str(block[key]) for key in block])
 
 
