@@ -12,10 +12,9 @@ genesis_block = {
 blockchain = [genesis_block]
 # Unhandled transactions
 open_transactions = []
-# We are the owner of this blockchain node, hence this is our identifier (e.g. for sending coins)
-owner = 'Max'
-# Registered participants: Ourself + other people sending/ receiving coins
-participants = {'Max'}
+owner = 'Shravan'
+
+participants = {'Shravan'}
 
 
 
