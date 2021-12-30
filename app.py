@@ -1,8 +1,7 @@
 import functools
-# The reward we give to miners (for creating a new block)
 MINING_REWARD = 10
 
-# Our starting block for the blockchain
+
 genesis_block = {
     'previous_hash': '',
     'index': 0,
