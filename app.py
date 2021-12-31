@@ -20,8 +20,7 @@ participants = {'Shravan'}
 
 def hash_block(block):
     
-    return hashlib.sha256(json.dumps(block).encode())
-    #return '-'.join([str(block[key]) for key in block])
+    return hashlib.sha256(json.dumps(block).encode()).hexdigest()
 
 
 def get_balance(participant):
@@ -163,7 +162,7 @@ while waiting_for_input:
             blockchain[0] = {
                 'previous_hash': '',
                 'index': 0,
-                'transactions': [{'sender': 'Chris', 'recipient': 'Max', 'amount': 100.0}]
+                'transactions': [{'sender': 'Chris', 'recipient': 'Shravan', 'amount': 100.0}]
             }
     elif user_choice == 'q':
         waiting_for_input = False
@@ -173,7 +172,7 @@ while waiting_for_input:
         print_blockchain_elements()
         print('Invalid blockchain!')
         break
-    print('Balance of {}: {:6.2f}'.format('Max', get_balance('Max')))
+    print('Balance of {}: {:6.2f}'.format('Shravan', get_balance('Shravan')))
 else:
     print('User left!')
 
