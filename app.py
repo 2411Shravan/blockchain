@@ -1,4 +1,6 @@
 import functools
+import hashlib
+
 MINING_REWARD = 10
 
 
