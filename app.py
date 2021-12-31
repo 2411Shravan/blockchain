@@ -1,5 +1,6 @@
 import functools
 import hashlib
+import json
 
 MINING_REWARD = 10
 
@@ -19,7 +20,8 @@ participants = {'Shravan'}
 
 def hash_block(block):
     
-    return '-'.join([str(block[key]) for key in block])
+    return hashlib.sha256(json.dumps(block).encode())
+    #return '-'.join([str(block[key]) for key in block])
 
 
 def get_balance(participant):
